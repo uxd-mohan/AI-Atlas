@@ -1,0 +1,2943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Atlas — Discover AI</title>
+
+<meta name="description"
+content="AI Atlas helps you discover, compare and explore AI tools for coding, research, images, video, writing, study, productivity and more.">
+
+<style>
+
+:root{
+    --bg:#070a12;
+    --surface:#101522;
+    --surface2:#151c2c;
+    --text:#f7f8ff;
+    --muted:#9ba6bb;
+    --border:rgba(255,255,255,.09);
+    --primary:#7657ff;
+    --cyan:#28d7ff;
+    --green:#36d399;
+    --yellow:#f6c453;
+    --red:#ff6b81;
+    --shadow:0 20px 70px rgba(0,0,0,.35);
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 0%,rgba(118,87,255,.15),transparent 30%),
+        radial-gradient(circle at 90% 10%,rgba(40,215,255,.10),transparent 28%),
+        var(--bg);
+    line-height:1.6;
+}
+
+/* NAV */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:17px 6%;
+
+    background:rgba(7,10,18,.78);
+    backdrop-filter:blur(20px);
+
+    border-bottom:1px solid var(--border);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+
+    background:linear-gradient(90deg,#fff,var(--cyan),var(--primary));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.nav-links{
+    display:flex;
+    gap:25px;
+    list-style:none;
+}
+
+.nav-links a{
+    color:var(--muted);
+    text-decoration:none;
+    font-size:14px;
+    transition:.2s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-actions{
+    display:flex;
+    gap:8px;
+}
+
+.nav-btn{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:white;
+    padding:9px 12px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+    min-height:650px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:100px 20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-orb{
+    position:absolute;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--primary),var(--cyan));
+    opacity:.12;
+    filter:blur(100px);
+    animation:orb 8s infinite alternate ease-in-out;
+}
+
+@keyframes orb{
+    from{
+        transform:translate(-120px,-30px) scale(.9);
+    }
+    to{
+        transform:translate(120px,60px) scale(1.2);
+    }
+}
+
+.hero-content{
+    max-width:950px;
+    position:relative;
+}
+
+.eyebrow{
+    display:inline-block;
+    padding:7px 14px;
+    border:1px solid rgba(118,87,255,.35);
+    background:rgba(118,87,255,.09);
+    color:#bdb1ff;
+    border-radius:999px;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(52px,8vw,100px);
+    line-height:.94;
+    letter-spacing:-6px;
+    margin-bottom:25px;
+
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #a99cff,
+        #68e9ff,
+        #fff
+    );
+
+    background-size:300%;
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    animation:titleGradient 7s linear infinite;
+}
+
+@keyframes titleGradient{
+    to{
+        background-position:300%;
+    }
+}
+
+.hero p{
+    color:var(--muted);
+    font-size:18px;
+    max-width:700px;
+    margin:auto;
+}
+
+/* SEARCH */
+
+.search{
+    max-width:760px;
+    margin:35px auto 0;
+
+    display:flex;
+
+    padding:7px;
+
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.045);
+
+    border-radius:18px;
+
+    box-shadow:0 0 60px rgba(118,87,255,.12);
+}
+
+.search input{
+    flex:1;
+    padding:15px;
+    background:none;
+    border:none;
+    outline:none;
+    color:white;
+    font-size:16px;
+}
+
+.search button{
+    border:none;
+    padding:0 22px;
+    border-radius:12px;
+    color:white;
+    font-weight:bold;
+    background:linear-gradient(135deg,var(--primary),#527fff);
+    cursor:pointer;
+}
+
+/* STATS */
+
+.stats{
+    max-width:1050px;
+    margin:-40px auto 80px;
+    padding:0 20px;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:25px;
+    text-align:center;
+    background:rgba(255,255,255,.025);
+    border:1px solid var(--border);
+    border-radius:18px;
+}
+
+.stat h2{
+    font-size:34px;
+}
+
+.stat p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* SECTIONS */
+
+section{
+    padding:90px 6%;
+}
+
+.section-head{
+    max-width:750px;
+    margin:0 auto 45px;
+    text-align:center;
+}
+
+.section-head h2{
+    font-size:42px;
+    letter-spacing:-2px;
+}
+
+.section-head p{
+    color:var(--muted);
+}
+
+/* TASK FINDER */
+
+.task-grid{
+    max-width:1050px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.task{
+    padding:22px;
+    border:1px solid var(--border);
+    background:var(--surface);
+    border-radius:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.task:hover{
+    transform:translateY(-7px);
+    border-color:rgba(118,87,255,.65);
+    box-shadow:var(--shadow);
+}
+
+.task-icon{
+    font-size:28px;
+}
+
+.task h3{
+    margin-top:10px;
+}
+
+.task p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* RECOMMENDATION */
+
+.recommendation{
+    max-width:900px;
+    margin:30px auto 0;
+    padding:30px;
+    border-radius:22px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(118,87,255,.13),
+            rgba(40,215,255,.06)
+        );
+    border:1px solid var(--border);
+    text-align:center;
+}
+
+.recommendation strong{
+    color:#bdb1ff;
+}
+
+/* DIRECTORY CONTROLS */
+
+.controls{
+    max-width:1250px;
+    margin:auto;
+}
+
+.control-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.filter{
+    border:1px solid var(--border);
+    background:var(--surface);
+    color:var(--muted);
+    padding:9px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.filter:hover,
+.filter.active{
+    color:white;
+    background:var(--primary);
+}
+
+.select{
+    background:var(--surface2);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px;
+}
+
+/* AI GRID */
+
+.ai-grid{
+    max-width:1250px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fill,minmax(285px,1fr));
+
+    gap:20px;
+}
+
+/* AI CARD */
+
+.ai-card{
+    background:linear-gradient(
+        145deg,
+        rgba(20,27,43,.95),
+        rgba(12,17,29,.95)
+    );
+
+    border:1px solid var(--border);
+    border-radius:21px;
+
+    padding:22px;
+
+    position:relative;
+
+    transition:
+        transform .3s,
+        box-shadow .3s,
+        border-color .3s;
+
+    animation:cardIn .45s ease both;
+}
+
+.ai-card:hover{
+    transform:translateY(-8px);
+    border-color:rgba(118,87,255,.55);
+    box-shadow:var(--shadow);
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.ai-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.ai-logo{
+    width:54px;
+    height:54px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(118,87,255,.22),
+            rgba(40,215,255,.08)
+        );
+
+    border:1px solid var(--border);
+
+    font-weight:900;
+    font-size:20px;
+}
+
+.favorite{
+    border:none;
+    background:none;
+    color:#667085;
+    font-size:23px;
+    cursor:pointer;
+}
+
+.favorite.active{
+    color:var(--yellow);
+}
+
+.ai-card h3{
+    margin-top:17px;
+    font-size:21px;
+}
+
+.description{
+    color:var(--muted);
+    font-size:14px;
+    min-height:68px;
+    margin:8px 0 15px;
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+}
+
+.tag{
+    font-size:11px;
+    padding:4px 8px;
+    border-radius:999px;
+    background:rgba(118,87,255,.11);
+    color:#bdb1ff;
+}
+
+.tag.free{
+    background:rgba(54,211,153,.08);
+    color:var(--green);
+}
+
+.rating{
+    color:var(--yellow);
+    margin-top:15px;
+}
+
+.pros{
+    color:var(--green);
+    font-size:12px;
+    margin-top:10px;
+}
+
+.cons{
+    color:var(--red);
+    font-size:12px;
+}
+
+.card-buttons{
+    display:flex;
+    gap:8px;
+    margin-top:18px;
+}
+
+.visit,
+.details{
+    flex:1;
+    text-align:center;
+    padding:10px;
+    border-radius:10px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.visit{
+    background:var(--primary);
+    color:white;
+}
+
+.details{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    color:white;
+}
+
+/* EMPTY */
+
+.empty{
+    text-align:center;
+    padding:60px;
+    color:var(--muted);
+}
+
+/* RANKINGS */
+
+.rankings{
+    max-width:1050px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.rank{
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    padding:20px;
+
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:18px;
+
+    transition:.25s;
+}
+
+.rank:hover{
+    transform:translateX(7px);
+}
+
+.rank-number{
+    font-size:28px;
+    font-weight:900;
+    color:var(--primary);
+}
+
+.rank p{
+    color:var(--muted);
+    font-size:13px;
+}
+
+/* COMPARE */
+
+.compare{
+    max-width:1100px;
+    margin:auto;
+}
+
+.compare-selects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.compare-selects select{
+    padding:14px;
+    background:var(--surface2);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.compare-table{
+    width:100%;
+    border-collapse:collapse;
+    overflow:hidden;
+    background:var(--surface);
+    border-radius:18px;
+}
+
+.compare-table th,
+.compare-table td{
+    padding:16px;
+    border-bottom:1px solid var(--border);
+    text-align:left;
+}
+
+.compare-table th{
+    color:#bdb1ff;
+}
+
+.compare-table td{
+    color:var(--muted);
+}
+
+/* ABOUT */
+
+.about{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+.about-box{
+    padding:35px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:24px;
+}
+
+.about-box p{
+    color:var(--muted);
+    margin-top:12px;
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:2000;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(10px);
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    max-width:650px;
+    width:100%;
+
+    max-height:85vh;
+    overflow:auto;
+
+    padding:30px;
+
+    background:var(--surface2);
+
+    border:1px solid var(--border);
+    border-radius:24px;
+
+    box-shadow:var(--shadow);
+
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    right:18px;
+    top:15px;
+
+    background:none;
+    border:none;
+
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.modal-logo{
+    width:70px;
+    height:70px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:20px;
+
+    background:rgba(118,87,255,.15);
+
+    font-size:28px;
+}
+
+.modal-box h2{
+    margin-top:18px;
+    font-size:32px;
+}
+
+.modal-box p{
+    color:var(--muted);
+    margin-top:10px;
+}
+
+.modal-info{
+    margin-top:20px;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.info{
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.info small{
+    color:var(--muted);
+}
+
+.info strong{
+    display:block;
+    margin-top:3px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:65px 6%;
+    border-top:1px solid var(--border);
+    text-align:center;
+}
+
+footer h2{
+    font-size:25px;
+}
+
+footer p{
+    color:var(--muted);
+    font-size:13px;
+    max-width:650px;
+    margin:8px auto;
+}
+
+/* MOBILE */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .task-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .rankings{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:65px 5%;
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+
+    .task-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .compare-selects{
+        grid-template-columns:1fr;
+    }
+
+    .search button{
+        display:none;
+    }
+
+    .modal-info{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">✦ AI ATLAS</div>
+
+    <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#finder">Find AI</a></li>
+        <li><a href="#directory">Directory</a></li>
+        <li><a href="#rankings">Rankings</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <button class="nav-btn" onclick="toggleTheme()">◐</button>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero" id="home">
+
+    <div class="hero-orb"></div>
+
+    <div class="hero-content">
+
+        <span class="eyebrow">
+            ✦ YOUR AI DISCOVERY ENGINE
+        </span>
+
+        <h1>
+            One place.<br>
+            Every AI.
+        </h1>
+
+        <p>
+            Discover, compare and explore AI tools for
+            research, coding, creativity, education,
+            productivity and beyond.
+        </p>
+
+        <div class="search">
+
+            <input
+                id="search"
+                placeholder="Search 80+ AI tools..."
+                oninput="applyFilters()"
+            >
+
+            <button onclick="applyFilters()">
+                Search
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+    <div class="stat">
+        <h2 id="totalTools">0</h2>
+        <p>AI Tools</p>
+    </div>
+
+    <div class="stat">
+        <h2 id="totalCategories">0</h2>
+        <p>Categories</p>
+    </div>
+
+    <div class="stat">
+        <h2>10/10</h2>
+        <p>Editorial Rating Scale</p>
+    </div>
+
+    <div class="stat">
+        <h2>∞</h2>
+        <p>Possibilities</p>
+    </div>
+
+</div>
+
+
+<!-- FINDER -->
+
+<section id="finder">
+
+    <div class="section-head">
+
+        <h2>What are you trying to do?</h2>
+
+        <p>
+            Tell AI Atlas your goal and we'll suggest tools.
+        </p>
+
+    </div>
+
+
+    <div class="task-grid">
+
+        <div class="task" onclick="recommend('image')">
+            <div class="task-icon">🎨</div>
+            <h3>Create Images</h3>
+            <p>Art, design, graphics and visuals.</p>
+        </div>
+
+        <div class="task" onclick="recommend('video')">
+            <div class="task-icon">🎬</div>
+            <h3>Create Video</h3>
+            <p>Generate and edit video.</p>
+        </div>
+
+        <div class="task" onclick="recommend('research')">
+            <div class="task-icon">🔎</div>
+            <h3>Research</h3>
+            <p>Find information and sources.</p>
+        </div>
+
+        <div class="task" onclick="recommend('coding')">
+            <div class="task-icon">💻</div>
+            <h3>Code</h3>
+            <p>Build websites and software.</p>
+        </div>
+
+        <div class="task" onclick="recommend('writing')">
+            <div class="task-icon">✍️</div>
+            <h3>Write</h3>
+            <p>Draft and improve writing.</p>
+        </div>
+
+        <div class="task" onclick="recommend('audio')">
+            <div class="task-icon">🎧</div>
+            <h3>Audio</h3>
+            <p>Voices, music and sound.</p>
+        </div>
+
+        <div class="task" onclick="recommend('productivity')">
+            <div class="task-icon">⚡</div>
+            <h3>Productivity</h3>
+            <p>Organize and automate work.</p>
+        </div>
+
+        <div class="task" onclick="recommend('chat')">
+            <div class="task-icon">💬</div>
+            <h3>Chat</h3>
+            <p>General AI assistants.</p>
+        </div>
+
+    </div>
+
+
+    <div id="recommendation" class="recommendation" style="display:none"></div>
+
+</section>
+
+
+<!-- DIRECTORY -->
+
+<section id="directory">
+
+    <div class="section-head">
+
+        <h2>Explore AI</h2>
+
+        <p>
+            Search, filter and compare the growing AI ecosystem.
+        </p>
+
+    </div>
+
+
+    <div class="controls">
+
+        <div class="control-row">
+
+            <button
+                class="filter active"
+                onclick="setCategory('all',this)"
+            >
+                All
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('chat',this)"
+            >
+                💬 Chat
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('research',this)"
+            >
+                🔎 Research
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('coding',this)"
+            >
+                💻 Coding
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('image',this)"
+            >
+                🎨 Image
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('video',this)"
+            >
+                🎬 Video
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('writing',this)"
+            >
+                ✍️ Writing
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('audio',this)"
+            >
+                🎧 Audio
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('productivity',this)"
+            >
+                ⚡ Productivity
+            </button>
+
+            <button
+                class="filter"
+                onclick="setCategory('automation',this)"
+            >
+                🤖 Automation
+            </button>
+
+        </div>
+
+
+        <div class="control-row">
+
+            <select
+                class="select"
+                id="priceFilter"
+                onchange="applyFilters()"
+            >
+                <option value="all">All pricing</option>
+                <option value="Free">Free</option>
+                <option value="Freemium">Freemium</option>
+                <option value="Paid">Paid</option>
+                <option value="Open Source">Open Source</option>
+            </select>
+
+
+            <select
+                class="select"
+                id="sortFilter"
+                onchange="applyFilters()"
+            >
+                <option value="rating">Highest rated</option>
+                <option value="name">Name A-Z</option>
+                <option value="nameReverse">Name Z-A</option>
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <div id="aiGrid" class="ai-grid"></div>
+
+</section>
+
+
+<!-- RANKINGS -->
+
+<section id="rankings">
+
+    <div class="section-head">
+
+        <h2>AI Atlas Picks</h2>
+
+        <p>
+            Editorial recommendations — not official rankings.
+        </p>
+
+    </div>
+
+
+    <div class="rankings">
+
+        <div class="rank">
+            <div class="rank-number">01</div>
+            <div>
+                <h3>General AI</h3>
+                <p>ChatGPT</p>
+            </div>
+        </div>
+
+        <div class="rank">
+            <div class="rank-number">02</div>
+            <div>
+                <h3>Research</h3>
+                <p>Perplexity</p>
+            </div>
+        </div>
+
+        <div class="rank">
+            <div class="rank-number">03</div>
+            <div>
+                <h3>Image Generation</h3>
+                <p>Midjourney</p>
+            </div>
+        </div>
+
+        <div class="rank">
+            <div class="rank-number">04</div>
+            <div>
+                <h3>Video</h3>
+                <p>Runway</p>
+            </div>
+        </div>
+
+        <div class="rank">
+            <div class="rank-number">05</div>
+            <div>
+                <h3>Coding</h3>
+                <p>Cursor</p>
+            </div>
+        </div>
+
+        <div class="rank">
+            <div class="rank-number">06</div>
+            <div>
+                <h3>Voice</h3>
+                <p>ElevenLabs</p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMPARE -->
+
+<section id="compare">
+
+    <div class="section-head">
+
+        <h2>Compare AI</h2>
+
+        <p>
+            Put two tools head-to-head.
+        </p>
+
+    </div>
+
+
+    <div class="compare">
+
+        <div class="compare-selects">
+
+            <select id="compareA" onchange="compareTools()"></select>
+
+            <select id="compareB" onchange="compareTools()"></select>
+
+        </div>
+
+
+        <table class="compare-table">
+
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th id="compareNameA">AI</th>
+                    <th id="compareNameB">AI</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Category</td>
+                    <td id="compareCategoryA"></td>
+                    <td id="compareCategoryB"></td>
+                </tr>
+
+                <tr>
+                    <td>Rating</td>
+                    <td id="compareRatingA"></td>
+                    <td id="compareRatingB"></td>
+                </tr>
+
+                <tr>
+                    <td>Pricing</td>
+                    <td id="comparePriceA"></td>
+                    <td id="comparePriceB"></td>
+                </tr>
+
+                <tr>
+                    <td>Best for</td>
+                    <td id="compareBestA"></td>
+                    <td id="compareBestB"></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="about">
+
+        <div class="section-head">
+
+            <h2>About AI Atlas</h2>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <h3>Why does AI Atlas exist?</h3>
+
+            <p>
+                The AI ecosystem is growing incredibly quickly.
+                New tools appear constantly, making it difficult
+                to know which one is right for a particular task.
+            </p>
+
+            <p>
+                AI Atlas is designed to make that discovery easier
+                by organizing AI tools into useful categories and
+                allowing people to compare them.
+            </p>
+
+            <p>
+                Ratings and recommendations are editorial opinions
+                and should not be treated as official rankings.
+                Features, pricing and availability can change.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MODAL -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal()">×</button>
+
+        <div id="modalContent"></div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>✦ AI ATLAS</h2>
+
+    <p>
+        Discover. Compare. Create.
+    </p>
+
+    <p>
+        An independent AI discovery project.
+    </p>
+
+    <p>
+        AI tools, pricing and capabilities change frequently.
+        Always verify information on the provider's official website.
+    </p>
+
+    <p>
+        © 2026 AI Atlas
+    </p>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   AI DATABASE
+========================================================= */
+
+const tools = [
+
+{
+name:"ChatGPT",
+icon:"✦",
+category:"chat",
+rating:9.8,
+price:"Freemium",
+best:"General AI",
+description:"General-purpose AI assistant for reasoning, writing, coding, research and creative work.",
+pros:"Extremely versatile",
+cons:"Some advanced features require paid access",
+url:"https://chatgpt.com"
+},
+
+{
+name:"Gemini",
+icon:"✦",
+category:"chat",
+rating:9.5,
+price:"Freemium",
+best:"Google ecosystem",
+description:"Google's AI assistant for reasoning, multimodal tasks and productivity.",
+pros:"Strong Google integration",
+cons:"Features vary by account and region",
+url:"https://gemini.google.com"
+},
+
+{
+name:"Claude",
+icon:"◉",
+category:"chat",
+rating:9.6,
+price:"Freemium",
+best:"Writing & analysis",
+description:"AI assistant focused on reasoning, writing, coding and long-context work.",
+pros:"Excellent long-form work",
+cons:"Some features require paid plans",
+url:"https://claude.ai"
+},
+
+{
+name:"Grok",
+icon:"𝕏",
+category:"chat",
+rating:9.0,
+price:"Freemium",
+best:"Conversational AI",
+description:"Conversational AI assistant from xAI.",
+pros:"Fast conversational experience",
+cons:"Availability varies",
+url:"https://grok.com"
+},
+
+{
+name:"Microsoft Copilot",
+icon:"◈",
+category:"chat",
+rating:8.9,
+price:"Freemium",
+best:"Microsoft ecosystem",
+description:"AI assistant integrated with Microsoft's ecosystem.",
+pros:"Microsoft integration",
+cons:"Best experience depends on Microsoft services",
+url:"https://copilot.microsoft.com"
+},
+
+{
+name:"Meta AI",
+icon:"∞",
+category:"chat",
+rating:8.7,
+price:"Free",
+best:"Everyday AI",
+description:"AI assistant from Meta.",
+pros:"Easy accessibility",
+cons:"Features vary",
+url:"https://www.meta.ai"
+},
+
+{
+name:"DeepSeek",
+icon:"◉",
+category:"chat",
+rating:9.1,
+price:"Free",
+best:"Reasoning & coding",
+description:"AI assistant known for reasoning and coding.",
+pros:"Strong value",
+cons:"Capabilities can change",
+url:"https://www.deepseek.com"
+},
+
+{
+name:"Mistral Le Chat",
+icon:"M",
+category:"chat",
+rating:8.8,
+price:"Freemium",
+best:"AI assistant",
+description:"AI assistant powered by Mistral.",
+pros:"Strong model ecosystem",
+cons:"Less mainstream",
+url:"https://chat.mistral.ai"
+},
+
+{
+name:"Poe",
+icon:"P",
+category:"chat",
+rating:8.6,
+price:"Freemium",
+best:"Multi-model AI",
+description:"Platform providing access to multiple AI models.",
+pros:"Many models in one place",
+cons:"Usage limits",
+url:"https://poe.com"
+},
+
+{
+name:"Kimi",
+icon:"K",
+category:"chat",
+rating:8.7,
+price:"Freemium",
+best:"Long-context tasks",
+description:"AI assistant for documents, research and reasoning.",
+pros:"Long-context workflows",
+cons:"Availability varies",
+url:"https://www.kimi.com"
+},
+
+{
+name:"Perplexity",
+icon:"⌕",
+category:"research",
+rating:9.7,
+price:"Freemium",
+best:"Web research",
+description:"AI search engine designed around web-grounded answers and sources.",
+pros:"Excellent research workflow",
+cons:"Advanced features can be limited",
+url:"https://www.perplexity.ai"
+},
+
+{
+name:"Consensus",
+icon:"C",
+category:"research",
+rating:8.8,
+price:"Freemium",
+best:"Academic research",
+description:"Research platform for scientific literature.",
+pros:"Academic focus",
+cons:"Specialized",
+url:"https://consensus.app"
+},
+
+{
+name:"Elicit",
+icon:"E",
+category:"research",
+rating:8.8,
+price:"Freemium",
+best:"Literature reviews",
+description:"AI research assistant for academic papers.",
+pros:"Research-focused",
+cons:"Not a general chatbot",
+url:"https://elicit.com"
+},
+
+{
+name:"Scite",
+icon:"S",
+category:"research",
+rating:8.5,
+price:"Paid",
+best:"Citation analysis",
+description:"Platform for analyzing scientific citations.",
+pros:"Citation context",
+cons:"Subscription required for advanced use",
+url:"https://scite.ai"
+},
+
+{
+name:"NotebookLM",
+icon:"N",
+category:"research",
+rating:9.3,
+price:"Free",
+best:"Study & sources",
+description:"Source-grounded AI notebook for research and learning.",
+pros:"Excellent source grounding",
+cons:"Best with supplied material",
+url:"https://notebooklm.google.com"
+},
+
+{
+name:"ChatPDF",
+icon:"PDF",
+category:"research",
+rating:8.5,
+price:"Freemium",
+best:"PDF analysis",
+description:"Ask questions about PDF documents.",
+pros:"Simple",
+cons:"Usage limits",
+url:"https://www.chatpdf.com"
+},
+
+{
+name:"Genspark",
+icon:"G",
+category:"research",
+rating:8.8,
+price:"Freemium",
+best:"AI search",
+description:"AI search and agentic research platform.",
+pros:"Multi-step research",
+cons:"Rapidly evolving",
+url:"https://www.genspark.ai"
+},
+
+{
+name:"GitHub Copilot",
+icon:"🐙",
+category:"coding",
+rating:9.4,
+price:"Freemium",
+best:"Programming",
+description:"AI coding assistant integrated into developer workflows.",
+pros:"Excellent IDE integration",
+cons:"Advanced access may require payment",
+url:"https://github.com/features/copilot"
+},
+
+{
+name:"Cursor",
+icon:"⌁",
+category:"coding",
+rating:9.7,
+price:"Freemium",
+best:"AI coding",
+description:"AI-powered code editor for understanding and editing codebases.",
+pros:"Excellent codebase workflows",
+cons:"Can take time to learn",
+url:"https://cursor.com"
+},
+
+{
+name:"Windsurf",
+icon:"〰",
+category:"coding",
+rating:9.1,
+price:"Freemium",
+best:"AI IDE",
+description:"AI-powered development environment.",
+pros:"Agentic coding workflows",
+cons:"Usage limits",
+url:"https://windsurf.com"
+},
+
+{
+name:"Replit",
+icon:"R",
+category:"coding",
+rating:9.0,
+price:"Freemium",
+best:"Build apps",
+description:"Browser-based coding and application development.",
+pros:"Easy to start",
+cons:"Advanced usage may cost money",
+url:"https://replit.com"
+},
+
+{
+name:"Bolt.new",
+icon:"⚡",
+category:"coding",
+rating:8.9,
+price:"Freemium",
+best:"Web apps",
+description:"Prompt-driven web application builder.",
+pros:"Very fast prototyping",
+cons:"Complex projects need refinement",
+url:"https://bolt.new"
+},
+
+{
+name:"Lovable",
+icon:"♥",
+category:"coding",
+rating:9.0,
+price:"Freemium",
+best:"App building",
+description:"AI-powered full-stack application builder.",
+pros:"Beginner-friendly",
+cons:"Large projects need refinement",
+url:"https://lovable.dev"
+},
+
+{
+name:"Blackbox AI",
+icon:"▣",
+category:"coding",
+rating:8.5,
+price:"Freemium",
+best:"Coding assistance",
+description:"AI platform for coding and development.",
+pros:"Wide feature set",
+cons:"Quality varies by task",
+url:"https://www.blackbox.ai"
+},
+
+{
+name:"Tabnine",
+icon:"T",
+category:"coding",
+rating:8.3,
+price:"Freemium",
+best:"Code completion",
+description:"AI coding assistant focused on code completion.",
+pros:"IDE integration",
+cons:"Less broad than agentic tools",
+url:"https://www.tabnine.com"
+},
+
+{
+name:"CodeRabbit",
+icon:"🐰",
+category:"coding",
+rating:8.4,
+price:"Freemium",
+best:"Code review",
+description:"AI assistant for reviewing code changes.",
+pros:"Useful pull-request reviews",
+cons:"Developer-focused",
+url:"https://coderabbit.ai"
+},
+
+{
+name:"Devin",
+icon:"D",
+category:"coding",
+rating:8.6,
+price:"Paid",
+best:"Software engineering",
+description:"AI software engineering agent.",
+pros:"Multi-step development",
+cons:"Advanced workflow",
+url:"https://devin.ai"
+},
+
+{
+name:"Phind",
+icon:"P",
+category:"coding",
+rating:8.5,
+price:"Freemium",
+best:"Developer search",
+description:"AI search and coding assistant.",
+pros:"Technical answers",
+cons:"Developer-focused",
+url:"https://www.phind.com"
+},
+
+{
+name:"Cline",
+icon:"C",
+category:"coding",
+rating:8.5,
+price:"Open Source",
+best:"AI coding agents",
+description:"Open-source coding agent.",
+pros:"Flexible",
+cons:"More setup",
+url:"https://cline.bot"
+},
+
+{
+name:"Aider",
+icon:"A",
+category:"coding",
+rating:8.3,
+price:"Open Source",
+best:"Terminal coding",
+description:"AI pair-programming tool.",
+pros:"Developer control",
+cons:"Terminal-oriented",
+url:"https://aider.chat"
+},
+
+{
+name:"Hugging Face",
+icon:"🤗",
+category:"coding",
+rating:9.2,
+price:"Free",
+best:"AI models",
+description:"Large ecosystem of AI models, datasets and applications.",
+pros:"Huge AI ecosystem",
+cons:"Can be overwhelming",
+url:"https://huggingface.co"
+},
+
+{
+name:"Ollama",
+icon:"O",
+category:"coding",
+rating:8.8,
+price:"Free",
+best:"Local AI",
+description:"Run compatible AI models locally.",
+pros:"Local control",
+cons:"Hardware requirements",
+url:"https://ollama.com"
+},
+
+{
+name:"OpenRouter",
+icon:"OR",
+category:"coding",
+rating:8.8,
+price:"Freemium",
+best:"AI models",
+description:"Access multiple AI models through one platform.",
+pros:"Many models",
+cons:"Model selection can be complex",
+url:"https://openrouter.ai"
+},
+
+{
+name:"Midjourney",
+icon:"✦",
+category:"image",
+rating:9.7,
+price:"Paid",
+best:"AI art",
+description:"High-quality AI image generation.",
+pros:"Excellent visual quality",
+cons:"Paid",
+url:"https://www.midjourney.com"
+},
+
+{
+name:"Adobe Firefly",
+icon:"✺",
+category:"image",
+rating:9.1,
+price:"Freemium",
+best:"Creative design",
+description:"Adobe generative AI tools.",
+pros:"Adobe integration",
+cons:"Credits vary",
+url:"https://firefly.adobe.com"
+},
+
+{
+name:"Ideogram",
+icon:"I",
+category:"image",
+rating:9.1,
+price:"Freemium",
+best:"Text in images",
+description:"AI image generation with strong typography.",
+pros:"Excellent text rendering",
+cons:"Free limits",
+url:"https://ideogram.ai"
+},
+
+{
+name:"Leonardo AI",
+icon:"L",
+category:"image",
+rating:9.0,
+price:"Freemium",
+best:"Creative assets",
+description:"AI image and asset generation.",
+pros:"Creative controls",
+cons:"Can be complex",
+url:"https://leonardo.ai"
+},
+
+{
+name:"Recraft",
+icon:"R",
+category:"image",
+rating:8.9,
+price:"Freemium",
+best:"Design assets",
+description:"AI design and vector generation.",
+pros:"Strong design workflows",
+cons:"Design-focused",
+url:"https://www.recraft.ai"
+},
+
+{
+name:"Fotor",
+icon:"F",
+category:"image",
+rating:8.2,
+price:"Freemium",
+best:"Photo editing",
+description:"AI photo editing and design.",
+pros:"Easy interface",
+cons:"Advanced tools are paid",
+url:"https://www.fotor.com"
+},
+
+{
+name:"Pixlr",
+icon:"P",
+category:"image",
+rating:8.1,
+price:"Freemium",
+best:"Photo editing",
+description:"Browser-based image editor.",
+pros:"Accessible",
+cons:"Some features paid",
+url:"https://pixlr.com"
+},
+
+{
+name:"PhotoRoom",
+icon:"PR",
+category:"image",
+rating:8.8,
+price:"Freemium",
+best:"Product photos",
+description:"AI product photography and background editing.",
+pros:"Excellent background tools",
+cons:"Focused use case",
+url:"https://www.photoroom.com"
+},
+
+{
+name:"Runway",
+icon:"▶",
+category:"video",
+rating:9.6,
+price:"Freemium",
+best:"AI video",
+description:"AI video generation and creative production.",
+pros:"Strong creative tools",
+cons:"Credits limited",
+url:"https://runwayml.com"
+},
+
+{
+name:"Kling AI",
+icon:"K",
+category:"video",
+rating:9.2,
+price:"Freemium",
+best:"Video generation",
+description:"AI platform for cinematic video generation.",
+pros:"Strong motion",
+cons:"Credits",
+url:"https://klingai.com"
+},
+
+{
+name:"Pika",
+icon:"P",
+category:"video",
+rating:8.8,
+price:"Freemium",
+best:"Creative clips",
+description:"AI video generation and effects.",
+pros:"Creative effects",
+cons:"Short-form focused",
+url:"https://pika.art"
+},
+
+{
+name:"HeyGen",
+icon:"H",
+category:"video",
+rating:9.0,
+price:"Freemium",
+best:"AI avatars",
+description:"AI avatar video and localization.",
+pros:"Strong presenter tools",
+cons:"Some features paid",
+url:"https://www.heygen.com"
+},
+
+{
+name:"Synthesia",
+icon:"S",
+category:"video",
+rating:8.8,
+price:"Paid",
+best:"Business video",
+description:"AI videos with virtual presenters.",
+pros:"Professional presentations",
+cons:"Business-focused",
+url:"https://www.synthesia.io"
+},
+
+{
+name:"InVideo AI",
+icon:"▶",
+category:"video",
+rating:8.6,
+price:"Freemium",
+best:"Social video",
+description:"AI-assisted video creation.",
+pros:"Fast",
+cons:"Templates can feel generic",
+url:"https://invideo.io"
+},
+
+{
+name:"Kapwing",
+icon:"K",
+category:"video",
+rating:8.5,
+price:"Freemium",
+best:"Video editing",
+description:"Online video editor with AI features.",
+pros:"Easy editing",
+cons:"Some exports restricted",
+url:"https://www.kapwing.com"
+},
+
+{
+name:"VEED",
+icon:"V",
+category:"video",
+rating:8.5,
+price:"Freemium",
+best:"Online video",
+description:"Browser-based video editor.",
+pros:"Beginner friendly",
+cons:"Some features paid",
+url:"https://www.veed.io"
+},
+
+{
+name:"Descript",
+icon:"D",
+category:"video",
+rating:9.0,
+price:"Freemium",
+best:"Podcast editing",
+description:"Text-based audio and video editor.",
+pros:"Unique workflow",
+cons:"Advanced features paid",
+url:"https://www.descript.com"
+},
+
+{
+name:"Fliki",
+icon:"F",
+category:"video",
+rating:8.2,
+price:"Freemium",
+best:"Faceless video",
+description:"Turn scripts into narrated videos.",
+pros:"Fast content",
+cons:"Less control",
+url:"https://fliki.ai"
+},
+
+{
+name:"Luma AI",
+icon:"L",
+category:"video",
+rating:8.8,
+price:"Freemium",
+best:"Video & 3D",
+description:"Generative AI platform for video and visual creation.",
+pros:"Creative generation",
+cons:"Generation limits",
+url:"https://lumalabs.ai"
+},
+
+{
+name:"Grammarly",
+icon:"G",
+category:"writing",
+rating:9.1,
+price:"Freemium",
+best:"Editing",
+description:"AI writing assistant for grammar and clarity.",
+pros:"Works across apps",
+cons:"Advanced features paid",
+url:"https://www.grammarly.com"
+},
+
+{
+name:"Jasper",
+icon:"J",
+category:"writing",
+rating:8.5,
+price:"Paid",
+best:"Marketing",
+description:"AI platform for marketing content.",
+pros:"Marketing-focused",
+cons:"Paid",
+url:"https://www.jasper.ai"
+},
+
+{
+name:"Copy.ai",
+icon:"C",
+category:"writing",
+rating:8.5,
+price:"Freemium",
+best:"Marketing copy",
+description:"AI platform for marketing and sales workflows.",
+pros:"Marketing automation",
+cons:"Advanced features paid",
+url:"https://www.copy.ai"
+},
+
+{
+name:"QuillBot",
+icon:"Q",
+category:"writing",
+rating:8.6,
+price:"Freemium",
+best:"Rewriting",
+description:"AI paraphrasing and writing assistant.",
+pros:"Easy rewriting",
+cons:"Free limits",
+url:"https://quillbot.com"
+},
+
+{
+name:"Wordtune",
+icon:"W",
+category:"writing",
+rating:8.3,
+price:"Freemium",
+best:"Rewriting",
+description:"AI writing assistant.",
+pros:"Good rewriting",
+cons:"Usage limits",
+url:"https://www.wordtune.com"
+},
+
+{
+name:"ElevenLabs",
+icon:"🔊",
+category:"audio",
+rating:9.7,
+price:"Freemium",
+best:"AI voice",
+description:"AI voice generation platform.",
+pros:"Natural voices",
+cons:"Usage limits",
+url:"https://elevenlabs.io"
+},
+
+{
+name:"Suno",
+icon:"♫",
+category:"audio",
+rating:9.5,
+price:"Freemium",
+best:"AI music",
+description:"Generative music creation platform.",
+pros:"Easy music creation",
+cons:"Generation limits",
+url:"https://suno.com"
+},
+
+{
+name:"Udio",
+icon:"♫",
+category:"audio",
+rating:9.1,
+price:"Freemium",
+best:"Music generation",
+description:"AI music creation platform.",
+pros:"Creative music workflows",
+cons:"Usage limits",
+url:"https://www.udio.com"
+},
+
+{
+name:"Murf AI",
+icon:"M",
+category:"audio",
+rating:8.8,
+price:"Freemium",
+best:"Voiceovers",
+description:"AI voice generation for media.",
+pros:"Professional voices",
+cons:"Many features paid",
+url:"https://murf.ai"
+},
+
+{
+name:"PlayHT",
+icon:"P",
+category:"audio",
+rating:8.6,
+price:"Freemium",
+best:"Text-to-speech",
+description:"AI speech generation.",
+pros:"Developer-friendly",
+cons:"Usage limits",
+url:"https://play.ht"
+},
+
+{
+name:"SOUNDRAW",
+icon:"♪",
+category:"audio",
+rating:8.3,
+price:"Paid",
+best:"Background music",
+description:"AI music for creators.",
+pros:"Useful for content",
+cons:"Paid",
+url:"https://soundraw.io"
+},
+
+{
+name:"AIVA",
+icon:"A",
+category:"audio",
+rating:8.2,
+price:"Freemium",
+best:"Composition",
+description:"AI music composition platform.",
+pros:"Instrumental music",
+cons:"Specialized",
+url:"https://www.aiva.ai"
+},
+
+{
+name:"Notion AI",
+icon:"N",
+category:"productivity",
+rating:9.2,
+price:"Freemium",
+best:"Notes",
+description:"AI inside the Notion workspace.",
+pros:"Excellent organization",
+cons:"Best inside Notion",
+url:"https://www.notion.so"
+},
+
+{
+name:"ClickUp AI",
+icon:"✓",
+category:"productivity",
+rating:8.7,
+price:"Freemium",
+best:"Project management",
+description:"AI productivity features inside ClickUp.",
+pros:"Large productivity ecosystem",
+cons:"Can feel complex",
+url:"https://clickup.com"
+},
+
+{
+name:"Motion",
+icon:"M",
+category:"productivity",
+rating:8.5,
+price:"Paid",
+best:"Planning",
+description:"AI-assisted scheduling and task management.",
+pros:"Automated planning",
+cons:"Paid",
+url:"https://www.usemotion.com"
+},
+
+{
+name:"Taskade",
+icon:"T",
+category:"productivity",
+rating:8.3,
+price:"Freemium",
+best:"AI workspaces",
+description:"AI workspace and task platform.",
+pros:"Flexible",
+cons:"Many features",
+url:"https://www.taskade.com"
+},
+
+{
+name:"Gamma",
+icon:"G",
+category:"productivity",
+rating:9.0,
+price:"Freemium",
+best:"Presentations",
+description:"AI presentation and document creation.",
+pros:"Very fast",
+cons:"Less design control",
+url:"https://gamma.app"
+},
+
+{
+name:"Tome",
+icon:"T",
+category:"productivity",
+rating:8.2,
+price:"Freemium",
+best:"Presentations",
+description:"AI presentation and storytelling tool.",
+pros:"Fast creation",
+cons:"Less flexible",
+url:"https://tome.app"
+},
+
+{
+name:"Beautiful.ai",
+icon:"B",
+category:"productivity",
+rating:8.4,
+price:"Paid",
+best:"Presentations",
+description:"AI-assisted presentation design.",
+pros:"Automatic design",
+cons:"Paid",
+url:"https://www.beautiful.ai"
+},
+
+{
+name:"Zapier AI",
+icon:"⚡",
+category:"automation",
+rating:9.1,
+price:"Freemium",
+best:"Automation",
+description:"Connect apps and automate workflows.",
+pros:"Huge integration ecosystem",
+cons:"Can become expensive",
+url:"https://zapier.com"
+},
+
+{
+name:"Make",
+icon:"M",
+category:"automation",
+rating:8.8,
+price:"Freemium",
+best:"Workflow automation",
+description:"Visual automation platform.",
+pros:"Powerful workflows",
+cons:"Learning curve",
+url:"https://www.make.com"
+},
+
+{
+name:"n8n",
+icon:"N",
+category:"automation",
+rating:8.9,
+price:"Open Source",
+best:"Automation",
+description:"Flexible workflow automation platform.",
+pros:"Highly customizable",
+cons:"Technical",
+url:"https://n8n.io"
+},
+
+{
+name:"Manus",
+icon:"M",
+category:"automation",
+rating:8.7,
+price:"Freemium",
+best:"AI agents",
+description:"Agent-style platform for multi-step tasks.",
+pros:"Agent workflows",
+cons:"Rapidly evolving",
+url:"https://manus.im"
+}
+
+];
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let category="all";
+
+
+/* =========================================================
+   COUNTERS
+========================================================= */
+
+document.getElementById("totalTools").textContent=tools.length;
+
+document.getElementById("totalCategories").textContent=
+    new Set(tools.map(x=>x.category)).size;
+
+
+/* =========================================================
+   FAVORITES
+========================================================= */
+
+let favorites=
+    JSON.parse(localStorage.getItem("aiAtlasFavorites")||"[]");
+
+
+function toggleFavorite(name){
+
+    if(favorites.includes(name)){
+
+        favorites=
+            favorites.filter(x=>x!==name);
+
+    }else{
+
+        favorites.push(name);
+
+    }
+
+    localStorage.setItem(
+        "aiAtlasFavorites",
+        JSON.stringify(favorites)
+    );
+
+    applyFilters();
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(list){
+
+    const grid=
+        document.getElementById("aiGrid");
+
+    grid.innerHTML="";
+
+    if(list.length===0){
+
+        grid.innerHTML=`
+            <div class="empty">
+                <h3>No AI tools found.</h3>
+                <p>Try another search or category.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+
+    list.forEach((ai,index)=>{
+
+        const favorite=
+            favorites.includes(ai.name);
+
+        const card=
+            document.createElement("article");
+
+        card.className="ai-card";
+
+        card.innerHTML=`
+
+            <div class="ai-header">
+
+                <div class="ai-logo">
+                    ${ai.icon}
+                </div>
+
+                <button
+                    class="favorite ${favorite?"active":""}"
+                    onclick="toggleFavorite('${ai.name}')"
+                    title="Favorite"
+                >
+                    ${favorite?"★":"☆"}
+                </button>
+
+            </div>
+
+            <h3>${ai.name}</h3>
+
+            <p class="description">
+                ${ai.description}
+            </p>
+
+            <div class="tags">
+
+                <span class="tag">
+                    ${ai.category}
+                </span>
+
+                <span class="tag free">
+                    ${ai.price}
+                </span>
+
+            </div>
+
+            <div class="rating">
+                ★ ${ai.rating}/10
+            </div>
+
+            <div class="pros">
+                ✓ ${ai.pros}
+            </div>
+
+            <div class="cons">
+                ✕ ${ai.cons}
+            </div>
+
+            <div class="card-buttons">
+
+                <button
+                    class="details"
+                    onclick="openModal('${ai.name}')"
+                >
+                    Details
+                </button>
+
+                <a
+                    class="visit"
+                    href="${ai.url}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onclick="rememberViewed('${ai.name}')"
+                >
+                    Visit →
+                </a>
+
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* =========================================================
+   FILTERING
+========================================================= */
+
+function setCategory(value,button){
+
+    category=value;
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(x=>x.classList.remove("active"));
+
+    button.classList.add("active");
+
+    applyFilters();
+
+    document
+        .getElementById("directory")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+}
+
+
+function applyFilters(){
+
+    const search=
+        document
+        .getElementById("search")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const price=
+        document
+        .getElementById("priceFilter")
+        .value;
+
+    const sort=
+        document
+        .getElementById("sortFilter")
+        .value;
+
+
+    let result=
+        tools.filter(ai=>{
+
+            const matchesSearch=
+
+                ai.name.toLowerCase().includes(search) ||
+
+                ai.category.toLowerCase().includes(search) ||
+
+                ai.best.toLowerCase().includes(search) ||
+
+                ai.description.toLowerCase().includes(search);
+
+
+            const matchesCategory=
+                category==="all" ||
+                ai.category===category;
+
+
+            const matchesPrice=
+                price==="all" ||
+                ai.price===price;
+
+
+            return(
+                matchesSearch &&
+                matchesCategory &&
+                matchesPrice
+            );
+
+        });
+
+
+    if(sort==="rating"){
+
+        result.sort(
+            (a,b)=>b.rating-a.rating
+        );
+
+    }
+
+    if(sort==="name"){
+
+        result.sort(
+            (a,b)=>a.name.localeCompare(b.name)
+        );
+
+    }
+
+    if(sort==="nameReverse"){
+
+        result.sort(
+            (a,b)=>b.name.localeCompare(a.name)
+        );
+
+    }
+
+
+    render(result);
+
+}
+
+
+/* =========================================================
+   RECOMMENDER
+========================================================= */
+
+function recommend(type){
+
+    const matches=
+        tools
+        .filter(x=>x.category===type)
+        .sort((a,b)=>b.rating-a.rating)
+        .slice(0,5);
+
+
+    const box=
+        document.getElementById("recommendation");
+
+
+    box.style.display="block";
+
+
+    box.innerHTML=`
+
+        <h3>
+            ✦ AI Atlas recommends
+        </h3>
+
+        <p>
+            Good options for <strong>${type}</strong>:
+        </p>
+
+        <strong>
+            ${matches.map(x=>x.name).join(" • ")}
+        </strong>
+
+        <br><br>
+
+        <button
+            class="details"
+            onclick="showRecommendations('${type}')"
+        >
+            Explore →
+        </button>
+
+    `;
+
+}
+
+
+function showRecommendations(type){
+
+    category=type;
+
+    document
+        .querySelectorAll(".filter")
+        .forEach(x=>x.classList.remove("active"));
+
+    applyFilters();
+
+    document
+        .getElementById("directory")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(name){
+
+    const ai=
+        tools.find(x=>x.name===name);
+
+    if(!ai) return;
+
+
+    document.getElementById("modalContent").innerHTML=`
+
+        <div class="modal-logo">
+            ${ai.icon}
+        </div>
+
+        <h2>${ai.name}</h2>
+
+        <p>
+            ${ai.description}
+        </p>
+
+        <div class="modal-info">
+
+            <div class="info">
+                <small>Category</small>
+                <strong>${ai.category}</strong>
+            </div>
+
+            <div class="info">
+                <small>Rating</small>
+                <strong>★ ${ai.rating}/10</strong>
+            </div>
+
+            <div class="info">
+                <small>Pricing</small>
+                <strong>${ai.price}</strong>
+            </div>
+
+            <div class="info">
+                <small>Best for</small>
+                <strong>${ai.best}</strong>
+            </div>
+
+            <div class="info">
+                <small>Advantage</small>
+                <strong>${ai.pros}</strong>
+            </div>
+
+            <div class="info">
+                <small>Limitation</small>
+                <strong>${ai.cons}</strong>
+            </div>
+
+        </div>
+
+        <br>
+
+        <a
+            class="visit"
+            href="${ai.url}"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            Visit Official Website →
+        </a>
+
+    `;
+
+
+    document
+        .getElementById("modal")
+        .classList.add("show");
+
+}
+
+
+function closeModal(){
+
+    document
+        .getElementById("modal")
+        .classList.remove("show");
+
+}
+
+
+document
+.getElementById("modal")
+.addEventListener("click",e=>{
+
+    if(e.target.id==="modal"){
+        closeModal();
+    }
+
+});
+
+
+/* =========================================================
+   COMPARE
+========================================================= */
+
+const compareA=
+    document.getElementById("compareA");
+
+const compareB=
+    document.getElementById("compareB");
+
+
+tools.forEach((ai,i)=>{
+
+    compareA.innerHTML+=
+        `<option value="${i}">${ai.name}</option>`;
+
+    compareB.innerHTML+=
+        `<option value="${i}">${ai.name}</option>`;
+
+});
+
+
+compareB.value=1;
+
+
+function compareTools(){
+
+    const a=
+        tools[compareA.value];
+
+    const b=
+        tools[compareB.value];
+
+
+    document.getElementById("compareNameA")
+        .textContent=a.name;
+
+    document.getElementById("compareNameB")
+        .textContent=b.name;
+
+    document.getElementById("compareCategoryA")
+        .textContent=a.category;
+
+    document.getElementById("compareCategoryB")
+        .textContent=b.category;
+
+    document.getElementById("compareRatingA")
+        .textContent=a.rating+"/10";
+
+    document.getElementById("compareRatingB")
+        .textContent=b.rating+"/10";
+
+    document.getElementById("comparePriceA")
+        .textContent=a.price;
+
+    document.getElementById("comparePriceB")
+        .textContent=b.price;
+
+    document.getElementById("compareBestA")
+        .textContent=a.best;
+
+    document.getElementById("compareBestB")
+        .textContent=b.best;
+
+}
+
+
+/* =========================================================
+   RECENTLY VIEWED
+========================================================= */
+
+function rememberViewed(name){
+
+    let viewed=
+        JSON.parse(
+            localStorage.getItem("aiAtlasViewed")||"[]"
+        );
+
+
+    viewed=
+        viewed.filter(x=>x!==name);
+
+    viewed.unshift(name);
+
+    viewed=viewed.slice(0,8);
+
+    localStorage.setItem(
+        "aiAtlasViewed",
+        JSON.stringify(viewed)
+    );
+
+}
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+let light=false;
+
+function toggleTheme(){
+
+    light=!light;
+
+
+    if(light){
+
+        document.documentElement.style.setProperty(
+            "--bg","#eef2ff"
+        );
+
+        document.documentElement.style.setProperty(
+            "--surface","#ffffff"
+        );
+
+        document.documentElement.style.setProperty(
+            "--surface2","#f8fafc"
+        );
+
+        document.documentElement.style.setProperty(
+            "--text","#111827"
+        );
+
+        document.documentElement.style.setProperty(
+            "--muted","#64748b"
+        );
+
+        document.body.style.background=
+            "#eef2ff";
+
+    }else{
+
+        document.documentElement.style.setProperty(
+            "--bg","#070a12"
+        );
+
+        document.documentElement.style.setProperty(
+            "--surface","#101522"
+        );
+
+        document.documentElement.style.setProperty(
+            "--surface2","#151c2c"
+        );
+
+        document.documentElement.style.setProperty(
+            "--text","#f7f8ff"
+        );
+
+        document.documentElement.style.setProperty(
+            "--muted","#9ba6bb"
+        );
+
+        document.body.style.background=
+            "";
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+render(tools);
+
+compareTools();
+
+</script>
+
+</body>
+</html>
